@@ -1,3 +1,5 @@
+const classnames = ReactionUI.Lib.classnames;
+
 class Button extends React.Component {
 
   props: {
@@ -30,10 +32,14 @@ class Button extends React.Component {
   }
 
   render() {
-    const classes = classnames({button: true, active: this.props.active});
+    const classes = classnames({
+      "btn": true,
+      "btn-default": true,
+      "active": this.props.active
+    });
 
     return (
-      <button className={classes} {...this.props}>
+      <button type="button" className={classes} {...this.props}>
         {this.renderIcon()}
         {this.props.children}
       </button>

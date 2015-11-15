@@ -43,7 +43,6 @@ Package.onUse(function (api) {
 
   api.addFiles("client/components/components.jsx", "client");
   api.export("ReactionUI");
-  api.export("classnames");
 
   api.addFiles("client/components/button/button.jsx", "client");
   api.addFiles("client/components/button/button.less", "client");
@@ -60,6 +59,7 @@ Package.onUse(function (api) {
   api.export("Metadata");
 
   api.addFiles("client/components/tags/tags.jsx", "client");
+  api.addFiles("client/components/tags/tags.less", "client");
   api.export("TagList");
 
   api.addFiles("client/styles/base.less", "client");
