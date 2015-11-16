@@ -34,8 +34,12 @@ class Button extends React.Component {
   render() {
     const classes = classnames({
       "btn": true,
-      "btn-default": true,
-      "active": this.props.active
+      "btn-default": this.props.status === null || this.props.status === "default",
+      "active": this.props.active,
+      "btn-success": this.props.status === "success",
+      "btn-danger": this.props.status === "danger",
+      "btn-info": this.props.status === "info",
+      "btn-warning": this.props.status === "warning"
     });
 
     return (

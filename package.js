@@ -6,7 +6,9 @@ Package.describe({
 });
 
 Npm.depends({
-  classnames: "2.2.0"
+  "classnames": "2.2.0",
+  "react-textarea-autosize": "3.1.0"
+  // "react-anything-sortable": "1.0.0"
 });
 
 Package.onUse(function (api) {

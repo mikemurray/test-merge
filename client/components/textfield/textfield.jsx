@@ -1,5 +1,6 @@
 // TODO: Place holder imports
 // import React from "react"
+const TextareaAutosize = ReactionUI.Lib.TextareaAutosize;
 
 class TextField extends React.Component {
   state = {
@@ -38,14 +39,12 @@ class TextField extends React.Component {
    */
   renderMultilineInput() {
     return (
-      <textarea
+      <TextareaAutosize
         className="{this.props.name}-edit-input"
         placeholder={this.props.i18nPlaceholder}
         value={this.state.value}
         onChange={this.onValueChange}
-        {...this.props}>
-
-      </textarea>
+/>
     );
   }
 
@@ -85,7 +84,7 @@ class TextField extends React.Component {
    */
   render() {
     return (
-      <div className="product-detail-edit {this.props.name}-edit">
+      <div className="rui textfield {this.props.name}-edit">
         {this.renderField()}
         <span className="product-detail-message" id="{{field}}-message"></span>
       </div>

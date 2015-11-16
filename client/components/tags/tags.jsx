@@ -1,8 +1,11 @@
+// const React = React;
 const TextField = ReactionUI.Components.TextField;
 const Button = ReactionUI.Components.Button;
+// const Sortable = ReactionUI.Lib.Sortable;
 const classnames = ReactionUI.Lib.classnames;
 
 class Tags extends React.Component {
+  displayName = "Tag List (Tags)"
 
   renderTags() {
     if (_.isArray(this.props.tags)) {
@@ -25,8 +28,10 @@ class Tags extends React.Component {
       const tags = this.props.tags.map((tag, index) => {
         return (
           <div className="rui tag edit" key={index}>
-            <TextField value={tag.name}></TextField>
-            <Button icon="times-circle"></Button>
+            <Button icon="bars" />
+            <TextField value={tag.name} />
+            <Button icon="bookmark" />
+            <Button icon="times-circle" />
           </div>
         );
       });
@@ -34,8 +39,8 @@ class Tags extends React.Component {
       // Add a blank tag for creating new tags
       tags.push(
         <div className="rui tag edit create" key="create">
-          <TextField i18nPlaceholder="addTag"></TextField>
-          <Button icon="plus"></Button>
+          <TextField i18nPlaceholder="addTag" />
+          <Button icon="plus" />
         </div>
       );
 
@@ -60,7 +65,8 @@ class Tags extends React.Component {
 
 // Prop Types
 Tags.propTypes = {
-  tags: React.PropTypes.array
+  editable: React.PropTypes.bool,
+  tags: React.PropTypes.arrayOf(ReactionCore.Schemas.Tag)
 };
 
 // Export

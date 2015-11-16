@@ -27,9 +27,9 @@ Metadata = class Metadata extends React.Component {
   renderMetadata() {
     return this.props.metafields.map((metadata, index) => {
       return (
-        <div className="meta-item" key={index}>
-          <div className="meta-key">{metadata.key}</div>
-          <div className="meta-key">{metadata.value}</div>
+        <div className="rui meta-item" key={index}>
+          <div className="rui meta-key">{metadata.key}</div>
+          <div className="rui meta-key">{metadata.value}</div>
         </div>
       );
     });
@@ -40,9 +40,9 @@ Metadata = class Metadata extends React.Component {
    * @return {JSX} metadata forms for each row of metadata
    */
   renderMetadataForm() {
-    return this.props.metafields.map((metadata, index) => {
+    const fields = this.props.metafields.map((metadata, index) => {
       return (
-        <div className="meta-item" key={index}>
+        <div className="rui meta-item" key={index}>
           <form onSubmit={this.handleSubmit}>
             <TextField name="key" value={metadata.key}></TextField>
             <TextField name="value" value={metadata.value}></TextField>
@@ -51,6 +51,19 @@ Metadata = class Metadata extends React.Component {
         </div>
       );
     });
+
+    // Blank fields for creating new metadata
+    fields.push(
+      <div className="rui meta-item create" key="create">
+        <form onSubmit={this.handleSubmit}>
+          <TextField name="key"></TextField>
+          <TextField name="value"></TextField>
+          <Button icon="plus" onClick={this.handleRemove} status="success" />
+        </form>
+      </div>
+    );
+
+    return fields;
   }
 
   /**
@@ -61,7 +74,7 @@ Metadata = class Metadata extends React.Component {
     // Admin editable metadata
     if (this.props.editable) {
       return (
-        <div className="metadata edit">
+        <div className="rui metadata edit">
           {this.renderMetadataForm()}
         </div>
       );
@@ -69,7 +82,7 @@ Metadata = class Metadata extends React.Component {
 
     // User readable metadata
     return (
-      <div className="metadata">
+      <div className="rui metadata">
         {this.renderMetadata()}
       </div>
     );
