@@ -33,12 +33,14 @@ Package.onUse(function (api) {
   api.use("less");
 
   // Community Packages
-  api.use("cosmos:browserify");
+  api.use("cosmos:browserify@0.9.0");
 
   // meteor add-on packages
   api.use("reactioncommerce:core@0.9.4");
 
   api.addFiles("lib/client.browserify.js", "client");
+
+  api.addFiles("client/styles/base.less", "client");
 
   // api.addFiles("server/register.js", ["server"]); // register as a reaction package
   // api.addFiles("server/stripe.js", ["server"]);
@@ -60,11 +62,16 @@ Package.onUse(function (api) {
   api.addFiles("client/components/metadata/metadata.less", "client");
   api.export("Metadata");
 
+  api.addFiles("client/components/items/item.jsx", "client");
+  api.addFiles("client/components/items/items.jsx", "client");
+  api.addFiles("client/components/items/items.less", "client");
+
+  api.addFiles("client/components/tags/tag.jsx", "client");
   api.addFiles("client/components/tags/tags.jsx", "client");
   api.addFiles("client/components/tags/tags.less", "client");
   api.export("TagList");
 
-  api.addFiles("client/styles/base.less", "client");
+  // api.addFiles("client/styles/base.less", "client");
   api.addFiles("client/styles/variables.less", "client");
   api.addFiles("client/styles/rtl.less", "client");
   api.addFiles("client/styles/mixins.less", "client");

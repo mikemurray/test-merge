@@ -1,48 +1,66 @@
 // const React = React;
 const TextField = ReactionUI.Components.TextField;
 const Button = ReactionUI.Components.Button;
+const Tag = ReactionUI.Components.Tag;
 // const Sortable = ReactionUI.Lib.Sortable;
 const classnames = ReactionUI.Lib.classnames;
 
 class Tags extends React.Component {
   displayName = "Tag List (Tags)"
 
-  renderTags() {
-    if (_.isArray(this.props.tags)) {
-      // Render edit fields
-      if (this.props.editable) {
-        return this.renderEditableTags();
-      }
 
-      // Otherwise, render tags for guest users
-      return this.props.tags.map((tag, index) => {
-        return (
-          <span className="rui tag" key={index}>{tag.name}</span>
-        );
-      });
+  handleNewTagSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.tag.value);
+    if (this.props.onCreateTag) {
+      console.log("ok?");
+      this.props.onCreateTag(event.target.tag.value);
     }
   }
 
-  renderEditableTags() {
+  handleTagCreate = (tagId) => {
+    if (this.props.onTagCreate) {
+      this.props.onTagCreate(tagId);
+    }
+  }
+
+  handleTagRemove = (tagId) => {
+    if (this.props.onTagRemove) {
+      this.props.onTagRemove(tagId);
+    }
+  }
+
+  handleTagUpdate = (event) => {
+
+  }
+
+  handleTagBookmark = (event) => {
+
+  }
+
+  renderTags() {
     if (_.isArray(this.props.tags)) {
-      const tags = this.props.tags.map((tag, index) => {
+      const tags = this.props.tags.map((tag) => {
         return (
-          <div className="rui tag edit" key={index}>
-            <Button icon="bars" />
-            <TextField value={tag.name} />
-            <Button icon="bookmark" />
-            <Button icon="times-circle" />
-          </div>
+          <Tag
+            editable={this.props.editable}
+            key={tag.name}
+            onTagBookmark={this.handleTagBookmark}
+            onTagRemove={this.handleTagRemove}
+            onTagUpdate={this.handleTagUpdate}
+            tag={tag} />
         );
       });
 
-      // Add a blank tag for creating new tags
-      tags.push(
-        <div className="rui tag edit create" key="create">
-          <TextField i18nPlaceholder="addTag" />
-          <Button icon="plus" />
-        </div>
-      );
+      // Render an blank tag for creating new tags
+      if (this.props.editable) {
+        tags.push(
+          <Tag
+            blank={true}
+            onTagCreate={this.handleTagCreate}
+          />
+        );
+      }
 
       return tags;
     }

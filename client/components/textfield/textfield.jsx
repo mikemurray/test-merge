@@ -1,5 +1,6 @@
 // TODO: Place holder imports
 // import React from "react"
+const classnames = ReactionUI.Lib.classnames;
 const TextareaAutosize = ReactionUI.Lib.TextareaAutosize;
 
 class TextField extends React.Component {
@@ -13,11 +14,30 @@ class TextField extends React.Component {
    * @param  {Event} event Event object
    * @return {void}
    */
-  onValueChange = (event) => {
-    console.log(event.target.value);
+  onChange = (event) => {
     this.setState({
       value: event.target.value
     });
+
+    if (this.props.onChange) {
+      this.props.onChange(event);
+    }
+  }
+
+  /**
+   * onValueChange
+   * @summary set the state when the value of the input is changed
+   * @param  {Event} event Event object
+   * @return {void}
+   */
+  onValueChange = (event) => {
+    this.setState({
+      value: event.target.value
+    });
+
+    if (this.props.onValueChange) {
+      this.props.onValueChange(event);
+    }
   }
 
   /**
@@ -59,7 +79,8 @@ class TextField extends React.Component {
         className="{this.props.name}-edit-input"
         {...this.props}
         value={this.state.value}
-        onChange={this.onValueChange}
+        onChange={this.onChange}
+        onBlur={this.onValueChange}
         placeholder={this.props.i18nPlaceholder}
 
         />
@@ -83,14 +104,33 @@ class TextField extends React.Component {
    * @return {JSX} component
    */
   render() {
+    const classes = classnames({
+      // Base
+      rui: true,
+      textfield: true,
+
+      // Alignment
+      center: this.props.align === "center",
+      left: this.props.align === "left",
+      right: this.props.align === "right"
+    });
+
     return (
-      <div className="rui textfield {this.props.name}-edit">
+      <div className={classes}>
         {this.renderField()}
         <span className="product-detail-message" id="{{field}}-message"></span>
       </div>
     );
   }
 }
+
+TextField.defaultProps = {
+  align: "left"
+};
+
+TextField.propTypes = {
+  align: React.PropTypes.oneOf(["left", "center", "right", "justify"])
+};
 
 // Export
 ReactionUI.Components.TextField = TextField;

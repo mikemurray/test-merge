@@ -91,5 +91,6 @@ Metadata = class Metadata extends React.Component {
 
 // Prop Types
 Metadata.propTypes = {
+  editable: React.PropTypes.bool,
   metafields: React.PropTypes.array
 };
