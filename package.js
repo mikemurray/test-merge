@@ -7,7 +7,9 @@ Package.describe({
 
 Npm.depends({
   "classnames": "2.2.0",
-  "react-textarea-autosize": "3.1.0"
+  "react-textarea-autosize": "3.1.0",
+  "sortablejs": "1.4.2",
+  "react-dom": "0.14.1"
   // "react-anything-sortable": "1.0.0"
 });
 
@@ -47,9 +49,25 @@ Package.onUse(function (api) {
 
   api.addFiles("client/components/components.jsx", "client");
   api.export("ReactionUI");
+  api.export("Sortable");
 
   api.addFiles("client/components/button/button.jsx", "client");
   api.addFiles("client/components/button/button.less", "client");
+
+  api.addFiles("client/components/items/item.jsx", "client");
+  api.addFiles("client/components/sortable/sortable.jsx", "client");
+  api.addFiles("client/components/items/items.jsx", "client");
+  api.addFiles("client/components/items/items.less", "client");
+
+
+  // api.addFiles("client/components/sortable/sortable.less", "client");
+
+  api.addFiles("client/components/seperator/seperator.jsx", "client");
+  api.addFiles("client/components/seperator/seperator.less", "client");
+
+
+  api.addFiles("client/components/buttonGroup/buttonGroup.jsx", "client");
+  api.addFiles("client/components/buttonGroup/buttonGroup.less", "client");
 
   api.addFiles("client/components/numericInput/numericInput.html", "client");
   api.addFiles("client/components/numericInput/numericInput.js", "client");
@@ -60,11 +78,10 @@ Package.onUse(function (api) {
 
   api.addFiles("client/components/metadata/metadata.jsx", "client");
   api.addFiles("client/components/metadata/metadata.less", "client");
-  api.export("Metadata");
 
-  api.addFiles("client/components/items/item.jsx", "client");
-  api.addFiles("client/components/items/items.jsx", "client");
-  api.addFiles("client/components/items/items.less", "client");
+
+  api.addFiles("client/components/media/media.jsx", "client");
+  api.addFiles("client/components/media/media.less", "client");
 
   api.addFiles("client/components/tags/tag.jsx", "client");
   api.addFiles("client/components/tags/tags.jsx", "client");

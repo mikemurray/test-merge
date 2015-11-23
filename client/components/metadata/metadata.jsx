@@ -4,8 +4,11 @@
 // TODO: For now lets pretend we have to do imports
 const TextField = ReactionUI.Components.TextField;
 const Button = ReactionUI.Components.Button;
+const Seperator = ReactionUI.Components.Seperator;
+const Item = ReactionUI.Components.Item;
+const Items = ReactionUI.Components.Items;
 
-Metadata = class Metadata extends React.Component {
+class Metadata extends React.Component {
 
   /**
    * Handle form submit
@@ -18,6 +21,10 @@ Metadata = class Metadata extends React.Component {
 
   handleRemove = (event) => {
     console.log("Remove!!");
+  }
+
+  handleSort = (event) => {
+    console.log("sort!!!!");
   }
 
   /**
@@ -42,28 +49,36 @@ Metadata = class Metadata extends React.Component {
   renderMetadataForm() {
     const fields = this.props.metafields.map((metadata, index) => {
       return (
-        <div className="rui meta-item" key={index}>
+        <Item key={index} size="full" type="meta">
           <form onSubmit={this.handleSubmit}>
             <TextField name="key" value={metadata.key}></TextField>
             <TextField name="value" value={metadata.value}></TextField>
             <Button type="button" icon="times-circle" onClick={this.handleRemove}></Button>
           </form>
-        </div>
+        </Item>
       );
     });
 
     // Blank fields for creating new metadata
-    fields.push(
-      <div className="rui meta-item create" key="create">
+    // fields.push(
+    //
+    // );
+
+    return fields;
+  }
+
+  renderMetadataCreateForm() {
+
+    return (
+      <Item type="meta-create" size="full">
         <form onSubmit={this.handleSubmit}>
+          <Button type="button" icon="edit"></Button>
           <TextField name="key"></TextField>
           <TextField name="value"></TextField>
           <Button icon="plus" onClick={this.handleRemove} status="success" />
         </form>
-      </div>
+      </Item>
     );
-
-    return fields;
   }
 
   /**
@@ -75,7 +90,14 @@ Metadata = class Metadata extends React.Component {
     if (this.props.editable) {
       return (
         <div className="rui metadata edit">
-          {this.renderMetadataForm()}
+          <Items
+            autoWrap={true}
+            static={true}
+          >
+            {this.renderMetadataForm()}
+          </Items>
+          <Seperator />
+          {this.renderMetadataCreateForm()}
         </div>
       );
     }
@@ -87,6 +109,10 @@ Metadata = class Metadata extends React.Component {
       </div>
     );
   }
+}
+
+Metadata.defaultProps = {
+  editable: true
 };
 
 // Prop Types
@@ -94,3 +120,5 @@ Metadata.propTypes = {
   editable: React.PropTypes.bool,
   metafields: React.PropTypes.array
 };
+
+ReactionUI.Components.Metadata = Metadata;
